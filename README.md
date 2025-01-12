@@ -44,8 +44,6 @@ The Random Forest algorithm builds an ensemble of decision trees, each trained o
 The proposed method for this project involves using a machine learning approach with Random Forest Regression to predict satellite trajectories based on telemetry data. The model is trained on satellite position and velocity features. The dataset is split into training, validation, and test sets, and performance is evaluated using multiple metrics such as MAE, MSE, RMSE, and R². The predicted trajectories are compared to actual data through 3D visualizations and key point analysis, including perigee and apogee. Having presented the methodology of work, the next step will be to present the actual implementation of the actual Satellite Trajectory Estimation model.
 
 
-
-
 # IV. Implementation
 
 The implementation of the actual trajectory estimation application consists of five main components:
@@ -83,7 +81,7 @@ After training the model, its performance is evaluated using appropriate metrics
 •	R-squared (R²) is a statistical measure that explains the proportion of variance in the target variable that is explained by the model. A value closer to 1 indicates a better fit. 
 
 
-4. Model Prediction
+#4. Model Prediction
 
 After being trained and evaluated, the model is used to make predictions on the test dataset. The test data is preprocessed similarly to the training data (including scaling) to ensure consistency. The model then predicts the satellite's positions in space, which are compared to the actual positions provided in the answer key. 
 	
@@ -91,7 +89,47 @@ To visualize these predictions, the code generates 3D plots that compare the act
 
 For a more in-deep analysis, the model also generates individual visualizations for specific satellites. By selecting specific satellite IDs, the code produces 3D plots showing the trajectory of each satellite, both actual and predicted. This plot helps in understanding how well the model performs for different cases, namely satellites, as different space objects may have different motion patterns due to orbital mechanics. In addition, the model visualizes the satellite’s trajectory around Earth. 
 
-5. Saving Results
+# 5. Saving Results
 
 After visualization, the model is designed to save the predicted and actual trajectory data to a .CSV file (satellite_trajectory_data.csv). This file contains the x, y, and z coordinates for both the actual and predicted positions of the satellites, allowing for further analysis and reporting. These files will be further utilized within a MATLAB script for visualization purposes while also marking key points such as perigee, apogee, and start/end positions.
 
+# V. Results
+
+In the next paragraphs, the results of the experiments carried out to assess the effectiveness of the suggested machine learning model for satellite trajectory prediction will be displayed. The performance of the model may be evaluated through several visualization graphs and through a feature importance analysis.
+
+![image](https://github.com/user-attachments/assets/aec8f9f9-3675-418a-b941-a3ff46fcca4d)
+
+Figure 2. displays the feature importance scores obtained from the training of the Random Forest model. The chart ranks the features based on their contribution to predicting the satellite’s trajectory. The most important features include the distance, followed by the individual positional components (z_sim, y_sim, x_sim). These results indicate that the satellite's positioning is the determining factor in the prediction of the satellite's trajectory.
+
+For each decision tree in the Random Forest, features are used to split the data at various nodes. The algorithm is tasked with measuring how well each feature separates the data into subsets. For regression, the goal of each split is to reduce the variance of the target variable within the child nodes. A feature that reduces variance more significantly is considered more important. The reduction in variance is calculated for each feature whenever a split occurs within the decision tree, and this reduction is summed across all trees in the forest.
+
+![image](https://github.com/user-attachments/assets/b8accac4-0b2a-41e8-aefb-3f2d09354881)
+
+Figure 3. depicts the actual versus predicted values for the X-coordinate of the satellite’s trajectory. The dashed line I the middle represents a perfect prediction line where the predicted values would match exactly the actual values. As such, the plot shows a strong correlation between the actual and predicted  coordinates, as the data points are clustered around the perfect prediction line. The spread is also consistent across the entire range of values, meaning the model performs well despite varying data.
+
+![image](https://github.com/user-attachments/assets/0abdb907-d9ab-48a2-8186-d3a2dffa20e9)
+
+![image](https://github.com/user-attachments/assets/41dc46ae-a44d-4ea3-b7c7-db738c00d5c8)
+
+Figure 4. depicts a similar result for both the Y and Z coordinates, displaying the performance of the model again.
+
+![image](https://github.com/user-attachments/assets/e36f0343-38a5-4358-8a6f-8a1cc5a6c660)
+
+Figure 5. displays a 3D plot comparing the actual and predicted trajectories for the satellite with ID 51. The blue line depicts the true trajectory of the satellite in question, while the red dashed line corresponds to the predicted made by the RF regressor. The performance of the model is yet again visible, displaying a strong correlation between the predicted and the actual trajectories of the satellites. Small inconsistencies can be observed, but in most part the actual trajectory is well depicted  by the model.
+
+![image](https://github.com/user-attachments/assets/1fd9546c-fc49-4221-9dcb-acf43575fbad)
+
+The final figure, Figure 6. provides a comprehensive visual comparison between the predicted and actual satellite trajectories of multiple satellites. While the predicted trajectory closely follows the actual path, minor deviations are still visible, leaving further room for improvements. Additionally, the identification of the Perigee and Apogee of the satellite’s trajectory highlights the model's ability to capture important aspects of the satellite’s orbit.
+
+
+# VI. Conclusion
+
+In conclusion, this study focused on predicting satellite trajectories using a Random Forest Regressor. The model was trained utilizing telemetry data (satellite position, velocity components etc.). The performance of the model was evaluated through 3D trajectory comparisons and statistical metrics, showing strong connection between the actual and predicted trajectories. The results highlight the potential of ML, specifically Random Forest, in modeling complex satellite motion. The model’s ability to predict satellite positions with high accuracy suggests its suitability for real-world applications, such as satellite navigation and orbit prediction.
+
+REFERENCES
+[1] Chris Mattmann, “Machine Learning with TensorFlow”, Second Edition, Manning, 2020, ISBN: 9781617297717.
+[2] Tyagi, P., “Workflow in Machine Learning Project. Medium”, 2018-12-23. [Online]. Available: https://medium.com/@pytyagi/work-flow-in-machine learning-project-327eddb946b4 [Accessed: 14- Jun- 2024]
+[3] D. Srivastava, “ML(Machine Learning) 1- ML is an application of artificial intelligence (AI). Artificial Intelligence provides systems the ability to automatically learn and improve from experience without being explicitly programmed.,” Linkedin.com, Apr. 18, 2024. https://www.linkedin.com/pulse/ml-models-darshika-srivastava-tuhkc/ (accessed Jan. 07, 2025).
+[4] SMullick, “satellite_position_data_IDAO_2020,” Kaggle.com, 2020. https://www.kaggle.com/datasets/sohamxi/satellite-position-data-idao-2020 (accessed Jan. 07, 2025). 
+[5] V. Kurama, “Regression in Machine Learning: What it is and Examples of Different Models,” Built In, Sep. 04, 2019. https://builtin.com/data-science/regression-machine-learning [Accessed Jan. 05.07.2025]
+[6]“A Beginner’s Guide to Random Forest Hyperparameter Tuning,” Analytics Vidhya, Mar. 12, 2020. https://www.analyticsvidhya.com/blog/2020/03/beginners-guide-random-forest-hyperparameter-tuning/?utm_source=chatgpt.com  (accessed Jan. 07, 2025).
